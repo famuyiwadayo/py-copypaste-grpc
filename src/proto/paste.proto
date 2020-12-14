@@ -1,0 +1,29 @@
+syntax="proto3";
+
+package paste;
+
+message Paste {
+    string _id = 1;
+    string content = 2;
+    string receiver = 3;
+    string sender = 4;
+    string timestamp = 5;
+}
+
+message PasteDTO {
+    string content = 1;
+    string receiver = 2;
+    string sender = 3;
+}
+
+message ByReceiver {
+    string receiver = 1;
+}
+
+message EMPTY {}
+
+service PasteService {
+    rpc SendPaste (PasteDTO) returns (EMPTY) {}
+    rpc ReceivePaste (ByReceiver) returns (stream Paste) {}
+}
+
